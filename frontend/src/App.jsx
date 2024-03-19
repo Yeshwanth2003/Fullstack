@@ -1,10 +1,11 @@
+import "./App.css";
 import React from "react";
 import { BRouter, MyRoute } from "simple-react-router-x";
 import Header from "./components/Yesh/header/HeaderWrapper";
 import Loader from "./components/Yesh/util/Loader";
 import { Provider } from "react-redux";
-import { store } from "./components/sk/state/store";
-import "./app.css";
+import { persistor, store } from "./components/sk/state/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 export default function App() {
   return (
@@ -47,6 +48,46 @@ export default function App() {
               }
             />
             <MyRoute
+              path={"/user/profile"}
+              component={
+                <SkWrapper>
+                  <Loader path={"../sk/pages/userdb.jsx"} />
+                </SkWrapper>
+              }
+            />
+            <MyRoute
+              path={"/user/events"}
+              component={
+                <SkWrapper>
+                  <Loader path={"../sk/pages/userdb.jsx"} />
+                </SkWrapper>
+              }
+            />
+            <MyRoute
+              path={"/auth/login"}
+              component={
+                <SkWrapper>
+                  <Loader path={"../sk/pages/authentication.jsx"} />
+                </SkWrapper>
+              }
+            />
+            <MyRoute
+              path={"/auth/forgot-password"}
+              component={
+                <SkWrapper>
+                  <Loader path={"../sk/pages/authentication.jsx"} />
+                </SkWrapper>
+              }
+            />
+            <MyRoute
+              path={"/auth/sign-up"}
+              component={
+                <SkWrapper>
+                  <Loader path={"../sk/pages/authentication.jsx"} />
+                </SkWrapper>
+              }
+            />
+            <MyRoute
               path={"/service"}
               component={<Loader path={"/Services/ServicesWrapper.jsx"} />}
             />
@@ -59,9 +100,11 @@ export default function App() {
 function SkWrapper({ children }) {
   return (
     <Provider store={store}>
-      <div style={{ padding: "150px 50px 0 50px", paddingTop: "150px" }}>
-        {children}
-      </div>
+      <PersistGate loading={null} persistor={persistor}>
+        <div style={{ padding: "150px 100px 0 100px", paddingTop: "110px" }}>
+          {children}
+        </div>
+      </PersistGate>
     </Provider>
   );
 }

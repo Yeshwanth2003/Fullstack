@@ -15,7 +15,7 @@ export default function Ticket({id, ticket, tickets, setTickets}) {
     
 
     return (
-        <div className='flex py-8 w-full border border-white justify-between divide-white divide-x-2'>
+        <div className='flex py-8 w-full text-black bg-[#FFF76A] justify-between divide-black divide-x-2'>
             <div className='px-8 py-4 flex flex-col justify-center space-y-1 w-1/2'>
                 <span>Ticket type</span>
                 <span className='uppercase text-3xl font-semibold tracking-wide'>{ticket?.type}</span>
@@ -24,11 +24,11 @@ export default function Ticket({id, ticket, tickets, setTickets}) {
             <div className='px-8 py-4 flex items-center justify-between w-1/2'>
                 <div className='flex flex-col space-y-1'>
                     <span>Price</span>
-                    <span className='uppercase text-3xl font-semibold tracking-wide'>{`$${Number(ticket?.price).toFixed(2)}`}</span>
-                    <span>{`+ $${Number(ticket?.service_fee).toFixed(2)}`} service fee</span>
+                    <span className='uppercase text-3xl font-semibold tracking-wide'>{`₹ ${Number(ticket?.price).toFixed(2)}`}</span>
+                    <span>{`+ ₹ ${Number(ticket?.service_fee).toFixed(2)}`} service fee</span>
                 </div>
                 <div className='flex'>
-                    <Select onChange={handleQuantity} type="person" title={"Quantity"} range={10} />
+                    <Select onChange={handleQuantity} defaultValue={ticket?.quantity} type="person" title={"Quantity"} range={10} />
                 </div>
             </div>
         </div>

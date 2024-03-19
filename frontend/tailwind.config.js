@@ -5,7 +5,11 @@ export default {
     "./src/components/sk/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "primary": "var(--bg-sandle)",
+      },
+    },
   },
   plugins: [],
 }
