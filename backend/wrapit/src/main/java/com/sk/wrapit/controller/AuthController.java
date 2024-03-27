@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/wrapit/api/v1/auth")
+@RequestMapping("/wrapit/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -77,6 +78,7 @@ public class AuthController {
     }
 
     @PostMapping("/forgot-password")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<?> forgotPassword(@RequestBody PasswordReq request) {
         BasicRes<String> response = new BasicRes<>();
 
@@ -92,6 +94,7 @@ public class AuthController {
     }
 
     @PatchMapping("/reset-password")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<?> patchPassword(@RequestParam String token, @RequestBody PasswordPatchReq request) {
         BasicRes<String> response = new BasicRes<>();
 
